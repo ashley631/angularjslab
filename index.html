@@ -12,21 +12,21 @@
 <body>
     
     <section ng-controller = "TodoController as $ctrl">
-        <form>
+        <form ng-submit="">
         <h2>TODO List</h2>
         <p>A place to store the things you have to do!</p>
-        <input type="text" placeholder="filter your to-do's">
+        <input type="text" placeholder="filter your to-do's" ng-model="TodoController.tasks">
 
         <ol>
-            <li ng-repeat="dog in $ctrl.tasks"
+            <li ng-repeat="dog in $ctrl.tasks | filter: TodoController.tasks"
                 ng-class= "{'completed' : dog.completed ===true} ">
-                <button ng-click="" ng-if="dog.completed ===false">Complete</button>
+                <button ng-click="$ctrl.task({addTask.$ctrl.task})" ng-if="dog.completed ===false">Complete</button>
                 <p>{{ dog.task  }}</p>
-                <p class="done">X</p>
+                <p class="done" ng-click="$ctrl.removeTask($index)">x</p>
             </li>
         </ol>
-        <input type="text" placeholder="Add your to do">
-        <button class="add">Add</button>
+        <input type="text" placeholder="Add your to do" ng-model="taskToAdd">
+        <button class="add" ng-click="$ctrl.addTask(taskToAdd)">Add</button>
         </form>
    
 
